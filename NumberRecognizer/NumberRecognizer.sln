@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberRecognizer", "appneuro\NumberRecognizer.csproj", "{E4A3B2BA-99BA-4ECF-84C6-731DAF2CD356}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4A3B2BA-99BA-4ECF-84C6-731DAF2CD356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A3B2BA-99BA-4ECF-84C6-731DAF2CD356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A3B2BA-99BA-4ECF-84C6-731DAF2CD356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A3B2BA-99BA-4ECF-84C6-731DAF2CD356}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F41114CA-EAFA-4A93-9B88-3951A93FBCA7}
+	EndGlobalSection
+EndGlobal

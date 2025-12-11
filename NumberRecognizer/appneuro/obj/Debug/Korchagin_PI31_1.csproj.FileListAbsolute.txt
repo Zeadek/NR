@@ -1,0 +1,10 @@
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\bin\Debug\appneuro.exe.config
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\bin\Debug\appneuro.exe
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\bin\Debug\appneuro.pdb
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\Korchagin_PI31_1.csproj.AssemblyReference.cache
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\appneuro.Form1.resources
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\appneuro.Properties.Resources.resources
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\Korchagin_PI31_1.csproj.GenerateResource.cache
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\Korchagin_PI31_1.csproj.CoreCompileInputs.cache
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\appneuro.exe
+C:\Users\apple\OneDrive\Рабочий стол\neuro\appneuro\obj\Debug\appneuro.pdb

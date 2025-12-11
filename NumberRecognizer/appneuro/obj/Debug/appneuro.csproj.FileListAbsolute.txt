@@ -1,0 +1,20 @@
+C:\Users\s0188310\source\repos\appneuro\appneuro\bin\Debug\appneuro.exe.config
+C:\Users\s0188310\source\repos\appneuro\appneuro\bin\Debug\appneuro.exe
+C:\Users\s0188310\source\repos\appneuro\appneuro\bin\Debug\appneuro.pdb
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.csproj.AssemblyReference.cache
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.Form1.resources
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.Properties.Resources.resources
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.csproj.GenerateResource.cache
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.csproj.CoreCompileInputs.cache
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.exe
+C:\Users\s0188310\source\repos\appneuro\appneuro\obj\Debug\appneuro.pdb
+C:\My Deals\учеба\neuro\appneuro\bin\Debug\appneuro.exe.config
+C:\My Deals\учеба\neuro\appneuro\bin\Debug\appneuro.exe
+C:\My Deals\учеба\neuro\appneuro\bin\Debug\appneuro.pdb
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.csproj.AssemblyReference.cache
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.Form1.resources
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.Properties.Resources.resources
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.csproj.GenerateResource.cache
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.csproj.CoreCompileInputs.cache
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.exe
+C:\My Deals\учеба\neuro\appneuro\obj\Debug\appneuro.pdb
