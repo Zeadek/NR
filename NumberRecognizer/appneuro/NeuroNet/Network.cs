@@ -30,7 +30,7 @@
         public void Train(Network net)
         {
             net.input_layer = new InputLayer(NetworkMode.Train);
-            int epoches = 15; //количество эпох обучения
+            int epoches = 10; //количество эпох обучения
             double tmpSumError;
             double[] errors;
             double[] temp_gsums1;
@@ -62,7 +62,7 @@
 
                         tmpSumError += errors[x] * errors[x] / 2;
                     }
-                    e_error_avr[k] = tmpSumError / errors.Length;//суммарное значение ошибки К-той эпохи
+                    e_error_avr[k] += tmpSumError / errors.Length;//суммарное значение ошибки К-той эпохи
 
 
                     //обратный проход и коррекция весов !!!!!!!!
@@ -76,9 +76,51 @@
             net.input_layer = null;//обнуление входнгого слоя
 
             //запись скорректированных весов в память
-            net.hidden_layer1.WeightInitialize(MemoryMode.SET, nameof(hidden_layer1) + "_memory.csv");
-            net.hidden_layer2.WeightInitialize(MemoryMode.SET, nameof(hidden_layer2) + "_memory.csv");
-            net.output_layer.WeightInitialize(MemoryMode.SET, nameof(output_layer) + "_memory.csv");
+            net.hidden_layer1.WeightInitialize(MemoryMode.SET, "memory\\hidden_layer1_memory.csv");
+            net.hidden_layer2.WeightInitialize(MemoryMode.SET, "memory\\hidden_layer2_memory.csv");
+            net.output_layer.WeightInitialize(MemoryMode.SET, "memory\\output_layer_memory.csv");
+        }
+        public void Test(Network net)
+        {
+            net.input_layer = new InputLayer(NetworkMode.Test);
+            int epoches = 3; //количество эпох обучения
+            double tmpSumError;
+            double[] errors;
+            double[] temp_gsums1;
+            double[] temp_gsums2;
+
+            e_error_avr = new double[epoches];
+            for (int k = 0; k < epoches; k++)//прохождение по эпохам
+            {
+                e_error_avr[k] = 0;
+                net.input_layer.Shuffling_Array_Rows(net.input_layer.Testset);
+                for (int i = 0; i < net.input_layer.Testset.GetLength(0); i++)
+                {
+                    double[] tmpTest = new double[15];
+                    for (int j = 0; j < tmpTest.Length; j++)
+                        tmpTest[j] = net.input_layer.Testset[i, j + 1];
+
+                    //прямой проход
+                    ForwardPass(net, tmpTest);//прямой проход обучающего образа
+
+                    //вычисление ошибки по итераци
+                    tmpSumError = 0;//для каждого обучающего образа среднее значение ошибки этого образа обнуляется
+                    errors = new double[net.fact.Length];//переопределение массива сигнала ошибки входного слоя
+                    for (int x = 0; x < errors.Length; x++)
+                    {
+                        if (x == net.input_layer.Testset[i, 0])//если номер выходного сигнала совпадает с желаемым
+                            errors[x] = 1.0 - net.fact[x];
+                        else
+                            errors[x] = -net.fact[x];
+
+                        tmpSumError += errors[x] * errors[x] / 2;
+                    }
+                    e_error_avr[k] += tmpSumError / errors.Length;//суммарное значение ошибки К-той эпо хи
+
+                }
+                e_error_avr[k] /= net.input_layer.Testset.GetLength(0);//среднее значение энергии ошибки одной эпохи
+
+            }
         }
     }
 }

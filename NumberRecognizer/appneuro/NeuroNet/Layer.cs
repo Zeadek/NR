@@ -15,10 +15,11 @@ namespace NumberRecognizer.NeuroNet
         string pathFileWeights; //путь к файлу с синаптическими весами
         protected int numOfNeurons;
         protected int numOfPrevNeurons;
-        protected const double learningRate = 0.077;
-        protected const double momentum = 0.070d;
+        protected const double learningRate = 0.045;
+        protected const double momentum = 0.025;
         protected double[,] lastDeltaWeights;
         protected Neuron[] neurons;
+        double[,] Weights;
 
         public Neuron[] Neurons { get { return neurons; } set { neurons = value; } }
         public double[] Data
@@ -118,7 +119,7 @@ namespace NumberRecognizer.NeuroNet
                         {
                             tmpArr2[j] = weights[i, j] * weights[i, j];
                         }
-                        tmpRatio = Math.Pow(tmpArr2.Average(), 1 / 2);
+                        tmpRatio = Math.Pow(tmpArr2.Average(), 1/2);
                         for (int j = 0; j < numOfPrevNeurons + 1; j++)
                         {
                             weights[i, j] /= tmpRatio;
@@ -137,27 +138,15 @@ namespace NumberRecognizer.NeuroNet
                     File.AppendAllText(path, tmpStr);
                     break;
                 case MemoryMode.SET:
-                    StringBuilder weightsBuilder = new StringBuilder();
-
-                    for (int i = 0; i < numOfNeurons; i++)
+                    weights = Weights;
+                    tmpStr = "";
+                    for (int i = 0; i < numOfNeurons; ++i)
                     {
-                        // Предполагаем, что у нейрона есть свойство Weights, содержащее массив весов
-                        // Включаем bias-вес (последний вес в массиве)
-                        for (int j = 0; j < numOfPrevNeurons + 1; j++)
-                        {
-                            // Добавляем вес с разделителем ";" и с точкой как десятичным разделителем
-                            weightsBuilder.Append(neurons[i].Weights[j].ToString(System.Globalization.CultureInfo.InvariantCulture));
-
-                            if (j < numOfPrevNeurons) // После последнего веса не ставим разделитель
-                                weightsBuilder.Append(";");
-                        }
-
-                        if (i < numOfNeurons - 1) // После последней строки не ставим перевод строки
-                            weightsBuilder.AppendLine();
+                        for (int j = 0; j < numOfPrevNeurons + 1; ++j)
+                            tmpStr += neurons[i].Weights[j].ToString() + ";";
+                        tmpStr += "\n";
                     }
-
-                    // Сохраняем в файл, перезаписывая предыдущие значения
-                    File.WriteAllText(path, weightsBuilder.ToString());
+                    File.WriteAllText(path, tmpStr);
                     break;
             }
             return weights;

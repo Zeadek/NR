@@ -110,7 +110,27 @@ namespace NumberRecognizer
             {
                 chart_Event.Series[0].Points.AddY(network.E_error_avr[i]);
             }
-            MessageBox.Show("Обучение успешно завершено.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button16_Click_1(object sender, EventArgs e)
+        {
+            network.Test(network);
+            for (int i = 0; i < network.E_error_avr.Length; i++)
+            {
+                chart_Event.Series[0].Points.AddY(network.E_error_avr[i]);
+            }
+        }
+
+        private void veses_Click(object sender, EventArgs e)
+        {
+            string pathDirWeights = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "memory");
+
+            if (Directory.Exists(pathDirWeights))
+                Directory.Delete(pathDirWeights, true);
+
+            chart_Event.Series[0].Points.Clear();
+
+            network = new Network();
         }
     }
 }

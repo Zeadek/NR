@@ -56,6 +56,8 @@ namespace NumberRecognizer
             this.button_Recognize = new System.Windows.Forms.Button();
             this.chart_Event = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Train = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.veses = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_NecessaryOutput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Event)).BeginInit();
             this.SuspendLayout();
@@ -245,7 +247,7 @@ namespace NumberRecognizer
             this.SaveTrainSample.AutoSize = true;
             this.SaveTrainSample.BackColor = System.Drawing.Color.Transparent;
             this.SaveTrainSample.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.SaveTrainSample.Location = new System.Drawing.Point(328, 72);
+            this.SaveTrainSample.Location = new System.Drawing.Point(410, 70);
             this.SaveTrainSample.Margin = new System.Windows.Forms.Padding(4);
             this.SaveTrainSample.Name = "SaveTrainSample";
             this.SaveTrainSample.Size = new System.Drawing.Size(188, 49);
@@ -258,7 +260,7 @@ namespace NumberRecognizer
             // numericUpDown_NecessaryOutput
             // 
             this.numericUpDown_NecessaryOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 50.8F);
-            this.numericUpDown_NecessaryOutput.Location = new System.Drawing.Point(213, 71);
+            this.numericUpDown_NecessaryOutput.Location = new System.Drawing.Point(623, 70);
             this.numericUpDown_NecessaryOutput.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_NecessaryOutput.Name = "numericUpDown_NecessaryOutput";
             this.numericUpDown_NecessaryOutput.Size = new System.Drawing.Size(94, 103);
@@ -269,7 +271,7 @@ namespace NumberRecognizer
             this.buttonRecognize.AutoSize = true;
             this.buttonRecognize.BackColor = System.Drawing.Color.Transparent;
             this.buttonRecognize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.buttonRecognize.Location = new System.Drawing.Point(328, 124);
+            this.buttonRecognize.Location = new System.Drawing.Point(410, 121);
             this.buttonRecognize.Margin = new System.Windows.Forms.Padding(4);
             this.buttonRecognize.Name = "buttonRecognize";
             this.buttonRecognize.Size = new System.Drawing.Size(188, 49);
@@ -282,7 +284,7 @@ namespace NumberRecognizer
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.8F);
-            this.label1.Location = new System.Drawing.Point(208, 27);
+            this.label1.Location = new System.Drawing.Point(517, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 26);
             this.label1.TabIndex = 18;
@@ -294,7 +296,7 @@ namespace NumberRecognizer
             // 
             this.label_Output.BackColor = System.Drawing.Color.SeaGreen;
             this.label_Output.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.8F);
-            this.label_Output.Location = new System.Drawing.Point(12, 71);
+            this.label_Output.Location = new System.Drawing.Point(12, 16);
             this.label_Output.Name = "label_Output";
             this.label_Output.Size = new System.Drawing.Size(100, 50);
             this.label_Output.TabIndex = 20;
@@ -305,7 +307,7 @@ namespace NumberRecognizer
             // 
             this.label_probability.BackColor = System.Drawing.Color.SeaGreen;
             this.label_probability.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.8F);
-            this.label_probability.Location = new System.Drawing.Point(16, 138);
+            this.label_probability.Location = new System.Drawing.Point(12, 78);
             this.label_probability.Name = "label_probability";
             this.label_probability.Size = new System.Drawing.Size(152, 32);
             this.label_probability.TabIndex = 21;
@@ -314,9 +316,9 @@ namespace NumberRecognizer
             // 
             // button_Recognize
             // 
-            this.button_Recognize.Location = new System.Drawing.Point(118, 71);
+            this.button_Recognize.Location = new System.Drawing.Point(9, 121);
             this.button_Recognize.Name = "button_Recognize";
-            this.button_Recognize.Size = new System.Drawing.Size(75, 35);
+            this.button_Recognize.Size = new System.Drawing.Size(99, 49);
             this.button_Recognize.TabIndex = 22;
             this.button_Recognize.Text = "Распознать";
             this.button_Recognize.UseVisualStyleBackColor = true;
@@ -343,13 +345,33 @@ namespace NumberRecognizer
             // 
             // Train
             // 
-            this.Train.Location = new System.Drawing.Point(118, 112);
+            this.Train.Location = new System.Drawing.Point(322, 78);
             this.Train.Name = "Train";
-            this.Train.Size = new System.Drawing.Size(75, 23);
+            this.Train.Size = new System.Drawing.Size(81, 32);
             this.Train.TabIndex = 24;
             this.Train.Text = "Train";
             this.Train.UseVisualStyleBackColor = true;
             this.Train.Click += new System.EventHandler(this.Train_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(231, 121);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(85, 35);
+            this.button16.TabIndex = 25;
+            this.button16.Text = "Test";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click_1);
+            // 
+            // veses
+            // 
+            this.veses.Location = new System.Drawing.Point(231, 78);
+            this.veses.Name = "veses";
+            this.veses.Size = new System.Drawing.Size(85, 32);
+            this.veses.TabIndex = 26;
+            this.veses.Text = "Обн.вес";
+            this.veses.UseVisualStyleBackColor = true;
+            this.veses.Click += new System.EventHandler(this.veses_Click);
             // 
             // Form1
             // 
@@ -357,6 +379,8 @@ namespace NumberRecognizer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(743, 483);
+            this.Controls.Add(this.veses);
+            this.Controls.Add(this.button16);
             this.Controls.Add(this.Train);
             this.Controls.Add(this.chart_Event);
             this.Controls.Add(this.button_Recognize);
@@ -418,6 +442,8 @@ namespace NumberRecognizer
         private System.Windows.Forms.Button button_Recognize;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Event;
         private System.Windows.Forms.Button Train;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button veses;
     }
 }
 

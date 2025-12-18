@@ -1,4 +1,5 @@
-﻿using System.Runtime.Remoting.Lifetime;
+﻿using System;
+using System.Runtime.Remoting.Lifetime;
 using static System.Math;
 
 namespace NumberRecognizer.NeuroNet
@@ -66,12 +67,14 @@ namespace NumberRecognizer.NeuroNet
 
         public double HyperbolicTangent(double x)
         {
-            return Tanh(x);
+            return 1.7159*Tanh((2.0/3.0)*x);
         }
 
         public double HyperbolicTangent_Derivativator(double x)
         {
-            return 1 - Pow(Tanh(x), 2);
+            double inner = (2.0 / 3.0) * x;
+            double tanhInner = Math.Tanh(inner);
+            return 1.7159 * (2.0 / 3.0) * (1.0 - tanhInner * tanhInner);
         }
     }
 }
