@@ -10,20 +10,94 @@
 
         private double[] fact = new double[10];//массив фактического выхода сети
         private double[] e_error_avr;//среднее значение энергии ошибки эпохи обучения
+        private double dropout_rate = 0.5; // вероятность отключения нейрона (по умолчанию 50%)
+        private bool[,] dropout_masks1; // маски дропаута для первого скрытого слоя
+        private bool[,] dropout_masks2; // маски дропаута для второго скрытого слоя
+        
         //свойства
         public double[] Fact { get => fact; }
         //среднее значение энергии ошибки эпохи обучения
         public double[] E_error_avr { get => e_error_avr; set => e_error_avr = value; }
+        
+        public double DropoutRate 
+        { 
+            get => dropout_rate; 
+            set 
+            { 
+                if (value >= 0.0 && value <= 1.0) 
+                    dropout_rate = value; 
+            } 
+        }
+        
         //конструктор
         public Network() { }
 
         //прямой проход сети
-        public void ForwardPass(Network net, double[] netInput)
+        public void ForwardPass(Network net, double[] netInput, bool apply_dropout = true)
         {
+            // Устанавливаем входные данные
             net.hidden_layer1.Data = netInput;
-            net.hidden_layer1.Recognize(null, net.hidden_layer2);
-            net.hidden_layer2.Recognize(null, net.output_layer);
+            
+            if (apply_dropout)
+            {
+                // Применяем dropout только во время обучения
+                ApplyDropoutToLayer(net.hidden_layer1, ref net.dropout_masks1, net.dropout_rate);
+                net.hidden_layer1.Recognize(net, net.hidden_layer2); // передаем net для доступа к dropout_rate
+                
+                ApplyDropoutToLayer(net.hidden_layer2, ref net.dropout_masks2, net.dropout_rate);
+                net.hidden_layer2.Recognize(net, net.output_layer); // передаем net для доступа к dropout_rate
+            }
+            else
+            {
+                // Без dropout для тестирования - все равно нужно сбросить состояния dropout
+                ResetDropoutState(net.hidden_layer1);
+                net.hidden_layer1.Recognize(net, net.hidden_layer2);
+                
+                ResetDropoutState(net.hidden_layer2);
+                net.hidden_layer2.Recognize(net, net.output_layer);
+            }
+            
+            // Для выходного слоя не применяем dropout, но передаем сеть для совместимости
             net.output_layer.Recognize(net, null);
+            
+            // Сбрасываем состояния dropout после завершения прямого прохода
+            if (apply_dropout)
+            {
+                ResetDropoutState(net.hidden_layer1);
+                ResetDropoutState(net.hidden_layer2);
+            }
+        }
+
+        // Метод для применения dropout к слою
+        private void ApplyDropoutToLayer(HiddenLayer layer, ref bool[,] dropout_mask, double dropout_rate)
+        {
+            Random rand = new Random();
+            int num_samples = 1; // Для одного образца за раз
+            
+            // Инициализация маски dropout если нужно
+            if (dropout_mask == null || dropout_mask.GetLength(0) != num_samples || dropout_mask.GetLength(1) != layer.Neurons.Length)
+            {
+                dropout_mask = new bool[num_samples, layer.Neurons.Length];
+            }
+
+            // Генерируем маску dropout для текущего образца
+            for (int i = 0; i < layer.Neurons.Length; i++)
+            {
+                bool isActive = rand.NextDouble() > dropout_rate;
+                dropout_mask[0, i] = isActive;
+
+                // Устанавливаем состояние dropout для нейрона
+                layer.Neurons[i].SetOutputToZero(!isActive); // Если !isActive, то нейрон отключен
+            }
+        }
+        
+        // Метод для сброса состояния dropout после обработки образца
+        private void ResetDropoutState(HiddenLayer layer)
+        {
+            for (int i = 0; i < layer.Neurons.Length; i++)
+            {
+                layer.Neurons[i].SetOutputToZero(false); // Сбрасываем состояние dropout
+            }
         }
 
         //непосредственное обучение
@@ -48,7 +122,7 @@
                         tmpTrain[j] = net.input_layer.Trainset[i, j + 1];
 
                     //прямой проход
-                    ForwardPass(net, tmpTrain);//прямой проход обучающего образа
+                    ForwardPass(net, tmpTrain, true);//прямой проход обучающего образа с dropout
 
                     //вычисление ошибки по итераци
                     tmpSumError = 0;//для каждого обучающего образа среднее значение ошибки этого образа обнуляется
@@ -101,7 +175,7 @@
                         tmpTest[j] = net.input_layer.Testset[i, j + 1];
 
                     //прямой проход
-                    ForwardPass(net, tmpTest);//прямой проход обучающего образа
+                    ForwardPass(net, tmpTest, false);//прямой проход тестового образа без dropout
 
                     //вычисление ошибки по итераци
                     tmpSumError = 0;//для каждого обучающего образа среднее значение ошибки этого образа обнуляется

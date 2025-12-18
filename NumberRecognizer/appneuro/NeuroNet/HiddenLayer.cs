@@ -13,7 +13,19 @@ namespace NumberRecognizer.NeuroNet
         {
             double[] hidden_out = new double[numOfNeurons];
             for (int i = 0; i < numOfNeurons; i++)
-                hidden_out[i] = neurons[i].Output;
+            {
+                // Если нейрон не отключен (dropout), масштабируем его выход для компенсации отключенных нейронов
+                if (!neurons[i].IsDroppedOut())
+                {
+                    // Используем инвертированный dropout: масштабируем активации во время обучения
+                    hidden_out[i] = neurons[i].Output / (1.0 - net.DropoutRate);
+                }
+                else
+                {
+                    // Если нейрон отключен, его выход равен 0
+                    hidden_out[i] = 0.0;
+                }
+            }
 
             nextLayer.Data = hidden_out;//передача выходного сигнала на вход след слоя
         }
